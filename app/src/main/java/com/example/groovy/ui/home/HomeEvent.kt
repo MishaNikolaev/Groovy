@@ -10,4 +10,5 @@ sealed class HomeEvent {
     object SkipToNextSong : HomeEvent()
     object SkipToPreviousSong : HomeEvent()
     data class OnSongSelected(val selectedSong: Song) : HomeEvent()
+    data class SeekSongToPosition(val newPosition: Long) : HomeEvent()
 }

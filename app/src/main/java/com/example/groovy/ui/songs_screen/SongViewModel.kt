@@ -28,6 +28,7 @@ class SongViewModel @Inject constructor(
             is SongEvent.SeekSongToPosition -> seekToPosition(event.position)
             SongEvent.SkipToNextSong -> skipToNextSong()
             SongEvent.SkipToPreviousSong -> skipToPreviousSong()
+            else -> {}
         }
     }
 
@@ -51,12 +52,5 @@ class SongViewModel @Inject constructor(
         seekSongToPositionUseCase(position)
     }
 
-    fun calculateColorPalette(drawable: Bitmap, onFinish: (Color) -> Unit) {
-        Palette.from(drawable).generate { palette ->
-            palette?.dominantSwatch?.rgb?.let { colorValue ->
-                onFinish(Color(colorValue))
-            }
-        }
-    }
 
 }

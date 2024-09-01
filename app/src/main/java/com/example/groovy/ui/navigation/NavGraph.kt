@@ -17,14 +17,15 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.groovy.other.MusicControllerUiState
 import com.example.groovy.ui.home.HomeEvent
 import com.example.groovy.ui.home.HomeScreen
 import com.example.groovy.ui.home.HomeViewModel
 import com.example.groovy.ui.home.component.HomeBottomBar
+import com.example.groovy.ui.songs_screen.SongEvent
 import com.example.groovy.ui.songs_screen.SongScreen
 import com.example.groovy.ui.songs_screen.SongViewModel
 import com.example.groovy.ui.viewmodels.SharedViewModel
-
 @Composable
 fun MusicPlayerApp(sharedViewModel: SharedViewModel) {
     val navController = rememberNavController()
@@ -36,7 +37,10 @@ fun MusicPlayerApp(sharedViewModel: SharedViewModel) {
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun MusicPlayerNavHost(navController: NavHostController, sharedViewModel: SharedViewModel) {
+fun MusicPlayerNavHost(
+    navController: NavHostController,
+    sharedViewModel: SharedViewModel,
+) {
     val musicControllerUiState = sharedViewModel.musicControllerUiState
     val activity = (LocalContext.current as ComponentActivity)
 
@@ -51,18 +55,20 @@ fun MusicPlayerNavHost(navController: NavHostController, sharedViewModel: Shared
                     isInitialized.value = true
                 }
             }
+
             Box(modifier = Modifier.fillMaxSize()) {
                 HomeScreen(
                     onEvent = mainViewModel::onEvent,
                     uiState = mainViewModel.homeUiState,
                 )
+
                 HomeBottomBar(
-                    modifier = Modifier
-                        .align(Alignment.BottomCenter),
+                    modifier = Modifier.align(Alignment.BottomCenter),
                     onEvent = mainViewModel::onEvent,
                     song = musicControllerUiState.currentSong,
                     playerState = musicControllerUiState.playerState,
-                    onBarClick = { navController.navigate(Destination.songScreen) }
+                    onBarClick = { navController.navigate(Destination.songScreen) },
+                    songProgress = musicControllerUiState,
                 )
             }
         }
@@ -77,4 +83,3 @@ fun MusicPlayerNavHost(navController: NavHostController, sharedViewModel: Shared
         }
     }
 }
-

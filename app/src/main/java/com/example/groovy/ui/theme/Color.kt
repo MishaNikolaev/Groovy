@@ -12,3 +12,13 @@ val Pink40 = Color(0xFF7D5260)
 
 val Teal200 = Color(0xFF03DAC5)
 val Orange700 = Color(0xFFF45B49)
+
+val DarkBlueGR = Color(0xFF191A1F)
+val BlueGR = Color(0xFF1402DF)
+val BlueSecondGR = Color(0xFF0C0464)
+val LightBlueGR = Color(0xFF0D6CFC)
+val WhiteGR = Color(0xFFF7F5F5)
+val GrayGR = Color(0xFF7978A0)
+val RedGR = Color(0xFFB53F3F)
+val LightGreenGR = Color(0xFF68C99E)
+val DarkGR = Color(0xFF090f22)
