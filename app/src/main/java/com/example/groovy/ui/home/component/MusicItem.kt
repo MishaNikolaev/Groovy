@@ -15,15 +15,20 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester.Companion.createRefs
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.solver.state.Dimension
 import androidx.constraintlayout.widget.ConstraintLayout
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.example.groovy.domain.model.Song
+import com.example.groovy.ui.theme.DarkGR
+import com.example.groovy.ui.theme.roboto
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.NonDisposableHandle.parent
 @Composable
@@ -62,7 +67,7 @@ fun MusicItem(
                 .size(56.dp)
                 .clip(MaterialTheme.shapes.medium)
                 .constrainAs(image) {
-                    end.linkTo(parent.end, 16.dp)
+                    start.linkTo(parent.start, 16.dp)
                     top.linkTo(parent.top, 16.dp)
                     bottom.linkTo(parent.bottom, 16.dp)
                 }
@@ -71,18 +76,20 @@ fun MusicItem(
         Text(
             text = song.title,
             maxLines = 2,
+            fontFamily = roboto,
+            fontSize = 16.sp,
+            fontWeight = FontWeight.SemiBold,
+            color = Color(0xFF2C2A2A),
             style = MaterialTheme.typography.subtitle1,
             modifier = Modifier.constrainAs(songTitle) {
                 linkTo(
-                    start = parent.start,
-                    end = image.start,
-                    startMargin = 24.dp,
+                    start = image.end,
+                    end = parent.end,
+                    startMargin = 16.dp,
                     endMargin = 16.dp,
                     bias = 0f
                 )
                 top.linkTo(parent.top, 16.dp)
-                start.linkTo(parent.start, 16.dp)
-                width = androidx.constraintlayout.compose.Dimension.preferredWrapContent
             }
         )
 
@@ -90,18 +97,19 @@ fun MusicItem(
             Text(
                 text = song.subtitle,
                 maxLines = 2,
-                style = MaterialTheme.typography.subtitle2,
+                fontSize = 14.sp,
+                fontFamily = roboto,
+                fontWeight = FontWeight.Normal,
+                color = Color(0xFF2C2A2A),
                 modifier = Modifier.constrainAs(songSubtitle) {
                     linkTo(
-                        start = parent.start,
-                        end = image.start,
-                        startMargin = 24.dp,
+                        start = image.end,
+                        end = parent.end,
+                        startMargin = 16.dp,
                         endMargin = 16.dp,
                         bias = 0f
                     )
                     top.linkTo(songTitle.bottom, 6.dp)
-                    start.linkTo(parent.start, 16.dp)
-                    width = androidx.constraintlayout.compose.Dimension.preferredWrapContent
                 }
             )
         }

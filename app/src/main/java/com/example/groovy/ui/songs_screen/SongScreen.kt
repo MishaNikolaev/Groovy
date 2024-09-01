@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FractionalThreshold
@@ -57,8 +58,10 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.example.groovy.R
@@ -66,7 +69,12 @@ import com.example.groovy.domain.model.Song
 import com.example.groovy.other.MusicControllerUiState
 import com.example.groovy.other.PlayerState
 import com.example.groovy.other.toTime
-import com.example.groovy.ui.songs_screen.component.AnimatedVinyl
+import com.example.groovy.ui.theme.BlueGR
+import com.example.groovy.ui.theme.BlueSecondGR
+import com.example.groovy.ui.theme.DarkGR
+import com.example.groovy.ui.theme.monterrat
+import com.example.groovy.ui.theme.roboto
+
 @ExperimentalMaterialApi
 @Composable
 fun SongScreen(
@@ -185,15 +193,15 @@ fun SongScreenContent(
 
     val sliderColors = if (isSystemInDarkTheme()) {
         SliderDefaults.colors(
-            thumbColor = MaterialTheme.colors.onBackground,
-            activeTrackColor = MaterialTheme.colors.onBackground,
+            thumbColor = Color(0xFF000000),
+            activeTrackColor = Color(0xFF202020),
             inactiveTrackColor = MaterialTheme.colors.onBackground.copy(
                 alpha = ProgressIndicatorDefaults.IndicatorBackgroundOpacity
             ),
         )
     } else SliderDefaults.colors(
-        thumbColor = dominantColor,
-        activeTrackColor = dominantColor,
+        thumbColor = Color(0xFF000000),
+        activeTrackColor = Color(0xFF202020),
         inactiveTrackColor = dominantColor.copy(
             alpha = ProgressIndicatorDefaults.IndicatorBackgroundOpacity
         ),
@@ -216,7 +224,8 @@ fun SongScreenContent(
             ) {
                 Column {
                     IconButton(
-                        onClick = onClose
+                        onClick = onClose,
+                        modifier = Modifier.align(Alignment.CenterHorizontally)
                     ) {
                         Image(
                             imageVector = Icons.Rounded.KeyboardArrowDown,
@@ -235,25 +244,32 @@ fun SongScreenContent(
                                 .aspectRatio(1f)
 
                         ) {
-                            AnimatedVinyl(painter = imagePainter, isSongPlaying = isSongPlaying)
+                            Image(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .align(Alignment.Center)
+                                    .clip(RoundedCornerShape(20.dp)),
+                                painter = imagePainter,
+                                contentDescription = "Song cover"
+                            )
                         }
 
                         Text(
                             text = song.title,
-                            style = MaterialTheme.typography.h5,
-                            color = MaterialTheme.colors.onBackground,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis
+                            fontFamily = roboto,
+                            fontSize = 24.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = DarkGR,
+                            modifier = Modifier.align(Alignment.CenterHorizontally)
                         )
 
                         Text(song.subtitle,
-                            style = MaterialTheme.typography.subtitle1,
-                            color = MaterialTheme.colors.onBackground,
                             maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                            modifier = Modifier.graphicsLayer {
-                                alpha = 0.60f
-                            })
+                            fontSize = 16.sp,
+                            fontFamily = roboto,
+                            fontWeight = FontWeight.Normal,
+                            color = Color(0xFF2196F3),
+                            modifier = Modifier.align(Alignment.CenterHorizontally))
 
                         Column(
                             modifier = Modifier
@@ -320,7 +336,7 @@ fun SongScreenContent(
                                     .clip(CircleShape)
                                     .background(MaterialTheme.colors.onBackground)
                                     .clickable(onClick = playOrToggleSong)
-                                    .size(64.dp)
+                                    .size(50.dp)
                                     .padding(8.dp)
                             )
                             Icon(

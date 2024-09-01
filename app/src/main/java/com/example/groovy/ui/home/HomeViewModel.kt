@@ -48,6 +48,7 @@ class HomeViewModel @Inject constructor(
             is HomeEvent.SkipToNextSong -> skipToNextSong()
 
             is HomeEvent.SkipToPreviousSong -> skipToPreviousSong()
+            else -> {}
         }
     }
 
