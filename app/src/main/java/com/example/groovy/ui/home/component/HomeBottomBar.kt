@@ -90,7 +90,7 @@ fun HomeBottomBar(
                         modifier = Modifier
                             .fillMaxWidth(fraction = currentProgress.coerceIn(0f, 1f))
                             .height(2.dp)
-                            .background(Color.Black)
+                            .background(Color(0xFFFFC107))
                     )
 
                     HomeBottomBarItem(
