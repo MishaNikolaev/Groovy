@@ -81,6 +81,7 @@ fun SongScreen(
     onEvent: (SongEvent) -> Unit,
     musicControllerUiState: MusicControllerUiState,
     onNavigateUp: () -> Unit,
+    modifier: Modifier
 ) {
     if (musicControllerUiState.currentSong != null) {
         SongScreenBody(
