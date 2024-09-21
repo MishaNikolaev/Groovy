@@ -22,3 +22,5 @@ val GrayGR = Color(0xFF7978A0)
 val RedGR = Color(0xFFB53F3F)
 val LightGreenGR = Color(0xFF68C99E)
 val DarkGR = Color(0xFF090f22)
+
+val GrayBottom = Color(0xF7F7F7F7)

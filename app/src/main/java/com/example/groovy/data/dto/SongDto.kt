@@ -5,5 +5,6 @@ data class SongDto(
     val title: String = "",
     val subtitle: String = "",
     val songUrl: String = "",
-    val imageUrl: String = ""
+    val imageUrl: String = "",
+
 )

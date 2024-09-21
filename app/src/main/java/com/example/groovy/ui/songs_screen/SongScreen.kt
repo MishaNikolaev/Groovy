@@ -269,7 +269,7 @@ fun SongScreenContent(
                             fontSize = 16.sp,
                             fontFamily = roboto,
                             fontWeight = FontWeight.Normal,
-                            color = Color(0xFF2196F3),
+                            color = Color(0xFF5A5959),
                             modifier = Modifier.align(Alignment.CenterHorizontally))
 
                         Column(
