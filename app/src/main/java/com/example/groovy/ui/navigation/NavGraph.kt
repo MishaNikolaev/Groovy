@@ -82,17 +82,8 @@ fun MusicPlayerNavHost(
     NavHost(navController = navController, startDestination = Destination.home) {
         composable(route = Destination.home) {
             val mainViewModel: HomeViewModel = hiltViewModel()
-            val isInitialized = rememberSaveable { mutableStateOf(false) }
-
-            if (!isInitialized.value) {
-                LaunchedEffect(key1 = Unit) {
-                    mainViewModel.onEvent(HomeEvent.FetchSong)
-                    isInitialized.value = true
-                }
-            }
-
             Box(modifier = Modifier.fillMaxSize()) {
-                HomeScreen(
+                SettingsScreen(
                     onEvent = mainViewModel::onEvent,
                     uiState = mainViewModel.homeUiState,
                 )
@@ -169,6 +160,36 @@ fun MusicPlayerNavHost(
             BackHandler {
                 navController.navigateUp()
                 setBottomBarVisible(true)
+            }
+        }
+        composable(route = Destination.settings) {
+            val mainViewModel: HomeViewModel = hiltViewModel()
+            val isInitialized = rememberSaveable { mutableStateOf(false) }
+
+            if (!isInitialized.value) {
+                LaunchedEffect(key1 = Unit) {
+                    mainViewModel.onEvent(HomeEvent.FetchSong)
+                    isInitialized.value = true
+                }
+            }
+
+            Box(modifier = Modifier.fillMaxSize()) {
+                HomeScreen(
+                    onEvent = mainViewModel::onEvent,
+                    uiState = mainViewModel.homeUiState,
+                )
+
+                HomeBottomBar(
+                    modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = 56.dp),
+                    onEvent = mainViewModel::onEvent,
+                    song = musicControllerUiState.currentSong,
+                    playerState = musicControllerUiState.playerState,
+                    onBarClick = {
+                        navController.navigate(Destination.songScreen)
+                        setBottomBarVisible(false)
+                    },
+                    songProgress = musicControllerUiState,
+                )
             }
         }
     }

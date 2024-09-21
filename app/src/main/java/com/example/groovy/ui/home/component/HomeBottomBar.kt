@@ -45,6 +45,7 @@ import com.example.groovy.domain.model.Song
 import com.example.groovy.other.MusicControllerUiState
 import com.example.groovy.other.PlayerState
 import com.example.groovy.ui.home.HomeEvent
+import com.example.groovy.ui.theme.GrayBottom
 import kotlinx.coroutines.delay
 @Composable
 fun HomeBottomBar(
@@ -85,7 +86,6 @@ fun HomeBottomBar(
                     .background(if (!isSystemInDarkTheme()) Color.LightGray else Color.DarkGray)
             ) {
                 Column {
-                    // Прогресс бар
                     Box(
                         modifier = Modifier
                             .fillMaxWidth(fraction = currentProgress.coerceIn(0f, 1f))
@@ -125,9 +125,9 @@ fun HomeBottomBarItem(
 ) {
     Box(
         modifier = Modifier
-            .height(64.dp)
+            .height(60.dp)
             .fillMaxWidth()
-            .background(Color.White)
+            .background(GrayBottom)
             .clickable(onClick = { onBarClick() })
     ) {
         Row(
@@ -161,7 +161,7 @@ fun HomeBottomBarItem(
                 Text(
                     song.subtitle,
                     style = MaterialTheme.typography.body2,
-                    color = MaterialTheme.colors.onBackground,
+                    color = Color(0xFF2C2A2A),
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier

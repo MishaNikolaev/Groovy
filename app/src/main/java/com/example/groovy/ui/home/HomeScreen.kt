@@ -54,7 +54,7 @@ fun HomeScreen(
                             CircularProgressIndicator(
                                 color = MaterialTheme.colors.onBackground,
                                 modifier = Modifier
-                                    .size(50.dp)
+                                    .size(80.dp)
                                     .fillMaxHeight()
                                     .align(Alignment.Center)
                                     .padding(
